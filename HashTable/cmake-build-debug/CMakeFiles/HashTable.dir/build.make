@@ -79,17 +79,17 @@ CMakeFiles/HashTable.dir/main.cpp.s: cmake_force
 	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Boris\CLionProjects\cppLabs\HashTable\main.cpp -o CMakeFiles\HashTable.dir\main.cpp.s
 
 CMakeFiles/HashTable.dir/HashTable.cpp.obj: CMakeFiles/HashTable.dir/flags.make
-CMakeFiles/HashTable.dir/HashTable.cpp.obj: HashTable.cpp
+CMakeFiles/HashTable.dir/HashTable.cpp.obj: ../HashTable.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Boris\CLionProjects\cppLabs\HashTable\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/HashTable.dir/HashTable.cpp.obj"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\HashTable.dir\HashTable.cpp.obj -c C:\Users\Boris\CLionProjects\cppLabs\HashTable\cmake-build-debug\HashTable.cpp
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\HashTable.dir\HashTable.cpp.obj -c C:\Users\Boris\CLionProjects\cppLabs\HashTable\HashTable.cpp
 
 CMakeFiles/HashTable.dir/HashTable.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/HashTable.dir/HashTable.cpp.i"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Boris\CLionProjects\cppLabs\HashTable\cmake-build-debug\HashTable.cpp > CMakeFiles\HashTable.dir\HashTable.cpp.i
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Boris\CLionProjects\cppLabs\HashTable\HashTable.cpp > CMakeFiles\HashTable.dir\HashTable.cpp.i
 
 CMakeFiles/HashTable.dir/HashTable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/HashTable.dir/HashTable.cpp.s"
-	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Boris\CLionProjects\cppLabs\HashTable\cmake-build-debug\HashTable.cpp -o CMakeFiles\HashTable.dir\HashTable.cpp.s
+	C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Boris\CLionProjects\cppLabs\HashTable\HashTable.cpp -o CMakeFiles\HashTable.dir\HashTable.cpp.s
 
 # Object files for target HashTable
 HashTable_OBJECTS = \

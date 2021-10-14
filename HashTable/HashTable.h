@@ -21,8 +21,8 @@ class HashTable {
     std::vector<element> table;
     unsigned hashFunc(const Key& key) const;
 public:
-    HashTable();
-    ~HashTable();
+    HashTable() = default;
+    ~HashTable() = default;
 
     HashTable(const HashTable& b);
     HashTable(HashTable&& b);

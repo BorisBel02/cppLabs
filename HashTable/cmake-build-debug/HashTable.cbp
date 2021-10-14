@@ -80,13 +80,13 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/cmake-build-debug/HashTable.cpp">
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/HashTable.cpp">
 			<Option target="HashTable"/>
 		</Unit>
-		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/cmake-build-debug/HashTable.h">
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/HashTable.h">
 			<Option target="HashTable"/>
 		</Unit>
-		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/cmake-build-debug/Shuffle.h">
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/Shuffle.h">
 			<Option target="HashTable"/>
 		</Unit>
 		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/HashTable/main.cpp">

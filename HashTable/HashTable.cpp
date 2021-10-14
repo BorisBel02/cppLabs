@@ -4,7 +4,18 @@
 
 #include "HashTable.h"
 #include "Shuffle.h"
-
+HashTable::HashTable(const HashTable& b)
+{
+    this -> tableSize = b.tableSize;
+    this -> table = b.table;
+}
+HashTable::HashTable(HashTable&& b)
+    : tableSize(b.tableSize),
+      table(b.table)
+{
+    b.tableSize = 0;
+    b.table.clear();
+}
 unsigned HashTable::hashFunc(const Key& key) const{
     unsigned int hash = 0;
     unsigned h = 0;
@@ -22,17 +33,19 @@ void HashTable::clear(){
 Value& HashTable::operator[](const Key& k){
     unsigned index = hashFunc(k);
     element::iterator it;
-    for(it = table[index].begin(); it != table[index].end(); it++){
+    for(it = table[index].begin(); it != table[index].end(); ++it){
         if(k == it->first){
             return it->second;
         }
     }
-    //table[index].push_back();//need a construct
+    ++it;
+    table[index].emplace_back();
 
+    return it -> second;
 }
 bool HashTable::erase(const Key& k){
     unsigned index = hashFunc(k);
-    for(auto it = table[index].begin(); it != table[index].end(); it++){
+    for(auto it = table[index].begin(); it != table[index].end(); ++it){
         if(k == it -> first){
             unsigned check = table[index].size();
             table[index].erase(it);
@@ -68,7 +81,7 @@ bool HashTable::contains(const Key& k) const{
     return false;
 }
 size_t HashTable::size() const {
-    size_t res;
+    size_t res = 0;
     for(const auto& el : table){
         res += el.size();
     }
@@ -76,12 +89,31 @@ size_t HashTable::size() const {
 }
 Value& HashTable::at(const Key &k) {
     unsigned index = hashFunc(k);
-    for(auto & it : table[index]){
-        if(k == it.first){
-            return it.second;
+    try {
+        for (auto &it: table[index]) {
+            if (k == it.first) {
+                return it.second;
+            }
         }
+        throw -1;
     }
-    std::cout << "ERROR: value with such key was not found" << std::endl;
+    catch(short i) {
+        std::cout << "ERROR: value with such key was not found" << std::endl;
+    }
+}
+const Value& HashTable::at(const Key& k) const{
+    unsigned index = hashFunc(k);
+    try {
+        for (auto &it: table[index]) {
+            if (k == it.first) {
+                return it.second;
+            }
+        }
+        throw -1;
+    }
+    catch(short i) {
+        std::cout << "ERROR: value with such key was not found" << std::endl;
+    }
 }
 bool HashTable::empty() const {
     return table.empty();
