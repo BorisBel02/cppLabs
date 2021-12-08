@@ -11,7 +11,7 @@ class Block;
 
 class BlockCreator{
 public:
-    virtual Block* Create(argString& params) = 0;
+    virtual Block* Create(argString& params) const = 0;
 
     virtual ~BlockCreator() = default;
 };

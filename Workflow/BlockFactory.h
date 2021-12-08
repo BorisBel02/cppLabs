@@ -16,6 +16,7 @@ class BlockFactory {
 public:
     static BlockFactory& instance();
     Block* create(argString& params);
+    void reg(const std::string& key, BlockCreator* creator);
 };
 
 

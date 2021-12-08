@@ -5,8 +5,13 @@
 #ifndef WORKFLOW_SORT_H
 #define WORKFLOW_SORT_H
 
-class sort: Block{
+#include "Block.h"
+class sort: public Block{
+    types getType() override{
+        return INOUT;
+    }
 
+    void execute(std::list<std::string>& text,argString& arg) override;
 };
 
 

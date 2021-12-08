@@ -7,18 +7,14 @@
 
 #include "Block.h"
 #include <fstream>
+#include <iostream>
 
 class writefile: Block{
+
     types getType() override{
         return OUT;
     }
-    void execute(argString& params, std::string text) override{
-        std::ofstream Out(params[2]);
-        if(!Out.is_open()){
-            //вернуть exception
-        }
-        std::fout << text << std::endl;
-    }
+    void execute(std::list<std::string >& text, argString& arg) override;
 };
 
 #endif //WORKFLOW_WRITEFILE_H

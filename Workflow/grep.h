@@ -9,21 +9,9 @@
 #include <string>
 #include <iostream>
 
-class grep: Block{
-    types getType() override{
-        return INOUT;
-    }
-    void execute(argString& params, std::string text) override{
-        std::string buf;
-        size_t textSize = text.size();
-        size_t stringsSize;
-        while (textSize != stringsSize){
-            std::getline(text, buf);
-            if(buf.find(params[2]) != std::string::npos){
-                std::cout << buf << endl;
-            }
-            stringsSize += buf.size();
-        }
-    }
+class grep: public Block{
+
+    types getType();
+    void execute(std::list<std::string>& text, argString& arg) override;
 };
 #endif //WORKFLOW_GREP_H

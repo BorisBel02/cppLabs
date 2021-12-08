@@ -5,6 +5,7 @@
 #ifndef WORKFLOW_BLOCK_H
 #define WORKFLOW_BLOCK_H
 
+#include <list>
 #include <string>
 #include <vector>
 
@@ -16,8 +17,9 @@ enum types{
 typedef std::vector<std::string> argString;
 
 class Block{
+
 public:
-    virtual void execute(argString& params, std::string text) = 0;
+    virtual void execute(std::list<std::string>& text, argString& arg) = 0;
     virtual types getType() = 0;
 
     virtual ~Block() = default;

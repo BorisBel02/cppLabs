@@ -6,19 +6,12 @@
 #define WORKFLOW_READFILE_H
 
 #include "Block.h"
-#include <fstream>
+#include "ConcreteBlockCreator.h"
 
-class readfile: Block{
-    types getType() override{
-        return IN;
-    }
-    void execute(argString& params, std::string text) override{
-        std::ifstream In(params[2]);
-        if(!In.is_open()){
-            //вернуть exception
-        }
-        while(fin.getline(In, text));
-    }
+class readfile: public Block{
+
+    types getType() override;
+    void execute(std::list<std::string>& text, argString& arg) override;
 };
 
 #endif //WORKFLOW_READFILE_H
