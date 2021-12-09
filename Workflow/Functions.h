@@ -10,6 +10,6 @@
 #include <algorithm>
 #include "ConcreteBlockCreator.h"
 
-void getInstructions(std::map<int, argString>& Blocks, std::string& in, std::vector<int>& workflow);
+void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int>& workflow);
 
 #endif //WORKFLOW_FUNCTIONS_H

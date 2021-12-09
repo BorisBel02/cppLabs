@@ -10,7 +10,7 @@ void grep::execute(std::list<std::string>& text, argString& arg){
     std::list<std::string> res;
 
     for (auto& it : text){
-        std::size_t found = it.find(arg[2]);
+        std::size_t found = it.find(arg[1]);
         if(found != std::string::npos){
         res.push_back(it);
         }

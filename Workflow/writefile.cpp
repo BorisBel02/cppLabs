@@ -6,7 +6,10 @@
 static ConcreteBlockCreator<writefile> write("writefile");
 
 void writefile::execute(std::list<std::string> &text, argString &arg) {
-    std::ofstream Out(arg[2]);
+    if(arg.size() != 2){
+        //exception
+    }
+    std::ofstream Out(arg[1]);
     if(!Out.is_open()){
         //вернуть exception
     }

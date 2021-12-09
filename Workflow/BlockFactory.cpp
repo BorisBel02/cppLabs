@@ -2,13 +2,6 @@
 // Created by Boris on 31.10.2021.
 //
 #include "BlockFactory.h"
-#include "ConcreteBlockCreator.h"
-#include "readfile.h"
-#include "grep.h"
-#include "replace.h"
-#include "sort.h"
-#include "writefile.h"
-#include "dump.h"
 
 BlockFactory& BlockFactory::instance() {
     static BlockFactory factory;
@@ -33,11 +26,11 @@ BlockFactory& BlockFactory::instance() {
 }
 
 Block* BlockFactory::create(argString& params) {
-    auto i = creators.find(params[1]);
+    auto i = creators.find(params[0]);
     if(i == creators.end()){
         //exception
     }
-    BlockCreator* creator = i->second;
+    BlockCreator* creator = i -> second;
     return creator->Create(params);
 }
 

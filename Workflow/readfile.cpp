@@ -8,7 +8,7 @@
 static ConcreteBlockCreator<readfile> read("readfile");
 
 void readfile::execute(std::list<std::string> &text, argString& arg) {
-    std::ifstream In(arg[2]);
+    std::ifstream In(arg[1]);
     if(!In.is_open()){
         //вернуть exception
     }

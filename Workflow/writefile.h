@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 
-class writefile: Block{
+class writefile: public Block{
 
     types getType() override{
         return OUT;
