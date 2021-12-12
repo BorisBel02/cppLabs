@@ -10,7 +10,7 @@ static ConcreteBlockCreator<readfile> read("readfile");
 void readfile::execute(std::list<std::string> &text, argString& arg) {
     std::ifstream In(arg[1]);
     if(!In.is_open()){
-        //вернуть exception
+        throw BlockException(this, "Input file was not opened", arg);
     }
     std::string buf;
     while(std::getline(In, buf)){

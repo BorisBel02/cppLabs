@@ -8,6 +8,7 @@
 #include <list>
 #include <string>
 #include <vector>
+#include "BlockException.h"
 
 enum types{
     IN,

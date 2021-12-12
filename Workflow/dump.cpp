@@ -10,7 +10,7 @@ static ConcreteBlockCreator<dump> dmp("dump");
 void dump::execute(std::list<std::string >& text, argString& arg){
     std::ofstream Out(arg[1]);
     if(!Out.is_open()){
-        //вернуть exception
+        throw BlockException(this, "Out file was not opened", arg);
     }
     for(auto const &It : text){
         Out << It << '\n';
