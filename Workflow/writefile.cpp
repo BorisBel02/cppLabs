@@ -3,15 +3,16 @@
 //
 #include "writefile.h"
 #include "ConcreteBlockCreator.h"
+#include "universalException.h"
 static ConcreteBlockCreator<writefile> write("writefile");
 
 void writefile::execute(std::list<std::string> &text, argString &arg) {
     if(arg.size() != 2){
-        throw BlockException(this, "Wrong arguments quantity", arg);
+        throw universalException("Wrong arguments quantity");
     }
     std::ofstream Out(arg[1]);
     if(!Out.is_open()){
-        throw BlockException(this, "Output file have not opened", arg);
+        throw universalException("Output file have not opened");
     }
     for(auto& It : text){
         Out << It << std::endl;

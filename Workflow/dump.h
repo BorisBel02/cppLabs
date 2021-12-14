@@ -7,6 +7,7 @@
 
 #include "Block.h"
 #include <iostream>
+#include "ConcreteBlockCreator.h"
 
 class dump: public Block{
     types getType() override{

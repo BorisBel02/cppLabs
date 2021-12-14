@@ -16,7 +16,7 @@ public:
     }
     Block* Create(argString& args) const override{
         //try?
-        return new T/*(args)*/;
+        return new T;
     }
 };
 #endif //WORKFLOW_CONCRETEBLOCKCREATOR_H

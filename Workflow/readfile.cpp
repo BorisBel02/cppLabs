@@ -4,13 +4,18 @@
 #include "readfile.h"
 #include<iostream>
 #include <fstream>
+#include "universalException.h"
 
 static ConcreteBlockCreator<readfile> read("readfile");
 
 void readfile::execute(std::list<std::string> &text, argString& arg) {
-    std::ifstream In(arg[1]);
+    if(arg.size() != 2){
+        throw universalException("Wrong arguments quantity");
+    }
+    std::ifstream In;
+    In.open(arg[1]);
     if(!In.is_open()){
-        throw BlockException(this, "Input file was not opened", arg);
+        throw universalException("Input file was not opened");
     }
     std::string buf;
     while(std::getline(In, buf)){

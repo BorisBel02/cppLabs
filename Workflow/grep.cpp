@@ -3,10 +3,14 @@
 //
 #include "ConcreteBlockCreator.h"
 #include "grep.h"
+#include "universalException.h"
 
 static ConcreteBlockCreator<grep> grp("grep");
 
 void grep::execute(std::list<std::string>& text, argString& arg){
+    if(arg.size() != 2){
+        throw universalException("Wrong arguments quantity");
+    }
     std::list<std::string> res;
 
     for (auto& it : text){

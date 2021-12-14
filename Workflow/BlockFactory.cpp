@@ -2,7 +2,7 @@
 // Created by Boris on 31.10.2021.
 //
 #include "BlockFactory.h"
-
+#include "FactoryException.h"
 BlockFactory& BlockFactory::instance() {
     static BlockFactory factory;
     /*static bool initialized = false;
@@ -28,7 +28,7 @@ BlockFactory& BlockFactory::instance() {
 Block* BlockFactory::create(argString& params) {
     auto i = creators.find(params[0]);
     if(i == creators.end()){
-        //exception
+        throw   FactoryException("Unregistered Block", params[0]);
     }
     BlockCreator* creator = i -> second;
     return creator->Create(params);
@@ -36,7 +36,8 @@ Block* BlockFactory::create(argString& params) {
 
 void BlockFactory::reg(const std::string& key, BlockCreator *creator) {
     if(creators.find(key) != creators.end()){
-        //exception
+        //throw FactoryException("Block redefinition", key);
+        int k = 1;
     }
     creators[key] = creator;
 }

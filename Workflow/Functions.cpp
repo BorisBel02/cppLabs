@@ -3,11 +3,12 @@
 //
 #include "Functions.h"
 #include <sstream>
+#include "universalException.h"
 void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int>& workflow){
     std::ifstream inputFile;
     inputFile.open(in);
     if(!inputFile.is_open()){
-        //exception
+        throw universalException("Instruction file was not opened");
     }
 
     std::vector <std::string> instructions;
@@ -21,14 +22,20 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
     int i = 0;
     while(instructions[i].find("desc") == std::string::npos){
         ++i;
+        if(i >= instructions.size()){
+            throw universalException("No Block description in the instruction file");
+        }
     }
     ++i;
     while(instructions[i].find("csed") == std::string::npos){
+        if(i >= instructions.size()){
+            throw universalException("No description end");
+        }
         int id;
         argString parameters;
         std::stringstream line(instructions[i]);
         if(!std::getline(line, buf, '=')){
-            //exception;
+            throw universalException("description");
         }
         id = std::stoi(buf);
         while(std::getline(line, buf, ' ')){
@@ -38,6 +45,9 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
         }
         Blocks[id] = parameters;
         ++i;
+    }
+    if(i + 1 >= instructions.size()){
+        throw universalException("No workflow in the instruction file");
     }
     std::stringstream line(instructions[i + 1]);
     while(std::getline(line, buf, ' ')){
