@@ -8,7 +8,7 @@
 int main(int argc, char** argv) {
 
     if(argc != 2){
-        std::cout << "Wrong console input" << std::endl;
+        std::cerr << "Wrong console input" << std::endl;
         exit(5);
     }
     std::vector<int> workflow;
@@ -17,9 +17,15 @@ int main(int argc, char** argv) {
     try {
         getInstructions(Blocks, argv[1], workflow);
     }
-    catch (universalException& ex){
-        std::cout << "ERROR\nWhile reading instructions: " << ex.what() << std::endl;
+    catch (const TypeException& ex){
+        std::cerr << "ERROR\nWhile reading instructions: " << ex.what() << std::endl;
+        if(ex.getId() != - 1){
+            std::cerr << "    id:" << ex.getId() << std::endl;
+        }
         exit(1);
+    }
+    catch (const std::exception& ex){
+        std::cerr << "ERROR\n" << "in " << ex.what()  << ":\n    " << typeid(ex).name() << std::endl;
     }
     BlockTypeCheck check;
     for(int i = 0; i < workflow.size(); ++i){
@@ -39,18 +45,21 @@ int main(int argc, char** argv) {
 
             delete Blck;
         }
-        catch (TypeException& ex){
-            std::cout << "ERROR\nIncorrect workflow: " << ex.what();
-            std::cout << "\n    Block name: " << ex.getName() << "\n    Block id: " << ex.getId() << std::endl;
+        catch (const TypeException& ex){
+            std::cerr << "ERROR\nIncorrect workflow: " << ex.what();
+            std::cerr << "\n    Block name: " << ex.getName() << "\n    Block id: " << ex.getId() << std::endl;
             exit(4);
         }
-        catch (FactoryException& ex){
-            std::cout << "ERROR\nIn Factory: " << ex.what() << "\n  Block name: " << ex.getName() << std::endl;
+        catch (const FactoryException& ex){
+            std::cerr << "ERROR\nIn Factory: " << ex.what() << "\n  Block name: " << ex.getName() << std::endl;
             exit(2);
         }
-        catch (universalException& ex){
-            std::cout << "ERROR\nDuring execution: " << ex.what() << std::endl;
+        catch (const universalException& ex){
+            std::cerr << "ERROR\nDuring execution: " << ex.what() << std::endl;
             exit(3);
+        }
+        catch (const std::exception& ex){
+            std::cerr << "ERROR\n" << "in" << ex.what()  << "\n    " << typeid(ex).name() << std::endl;
         }
     }
 

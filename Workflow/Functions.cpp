@@ -3,12 +3,12 @@
 //
 #include "Functions.h"
 #include <sstream>
-#include "universalException.h"
+#include "TypeException.h"
 void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int>& workflow){
     std::ifstream inputFile;
     inputFile.open(in);
     if(!inputFile.is_open()){
-        throw universalException("Instruction file was not opened");
+        throw TypeException("Instruction file was not opened");
     }
 
     std::vector <std::string> instructions;
@@ -23,7 +23,7 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
     while(instructions[i].find("desc") == std::string::npos){
         ++i;
         if(i >= instructions.size()){
-            throw universalException("No Block description in the instruction file");
+            throw TypeException("No Block description in the instruction file");
         }
     }
     ++i;
@@ -31,7 +31,7 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
     while(instructions[j].find("csed") == std::string::npos){
         ++j;
         if(j >= instructions.size()){
-            throw universalException("No Block description end in the instruction file");
+            throw TypeException("No Block description end in the instruction file");
         }
     }
     while(instructions[i].find("csed") == std::string::npos){
@@ -39,10 +39,14 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
         argString parameters;
         std::stringstream line(instructions[i]);
         if(!std::getline(line, buf, '=')){
-            throw universalException("description");
+            throw TypeException("description");
         }
 
         id = std::stoi(buf);
+        if(Blocks.find(id) != Blocks.end()){
+            throw(TypeException("Id redefinition", id));
+        }
+
         while(std::getline(line, buf, ' ')){
             if(!buf.empty()){
                 parameters.push_back(buf);
@@ -52,7 +56,7 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
         ++i;
     }
     if(i + 1 >= instructions.size()){
-        throw universalException("No workflow in the instruction file");
+        throw TypeException("No workflow in the instruction file");
     }
     std::stringstream line(instructions[i + 1]);
     while(std::getline(line, buf, ' ')){

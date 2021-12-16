@@ -14,8 +14,9 @@ class TypeException :public std::exception{
 public:
     TypeException(const char* msg, std::string& nm, int d);
     TypeException(const char *msg, int d);
-    std::string getName();
-    int getId();
+    TypeException(const char *msg);
+    std::string getName() const;
+    int getId() const;
     const char * what() const noexcept override;
 };
 

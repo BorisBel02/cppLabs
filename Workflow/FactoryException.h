@@ -14,7 +14,7 @@ public:
         message = pr;
         name = blockName;
     }
-    std::string getName(){
+    std::string getName() const{
         return name;
     }
     const char * what() const noexcept override{
