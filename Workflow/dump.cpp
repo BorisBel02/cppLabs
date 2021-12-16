@@ -5,7 +5,7 @@
 #include "fstream"
 #include "universalException.h"
 
-static ConcreteBlockCreator<dump> dmp("grep");
+static ConcreteBlockCreator<dump> dmp("dump");
 
 void dump::execute(std::list<std::string >& text, argString& arg){
     if(arg.size() != 2){

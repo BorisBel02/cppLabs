@@ -27,16 +27,21 @@ void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int
         }
     }
     ++i;
-    while(instructions[i].find("csed") == std::string::npos){
-        if(i >= instructions.size()){
-            throw universalException("No description end");
+    int j = i;
+    while(instructions[j].find("csed") == std::string::npos){
+        ++j;
+        if(j >= instructions.size()){
+            throw universalException("No Block description end in the instruction file");
         }
+    }
+    while(instructions[i].find("csed") == std::string::npos){
         int id;
         argString parameters;
         std::stringstream line(instructions[i]);
         if(!std::getline(line, buf, '=')){
             throw universalException("description");
         }
+
         id = std::stoi(buf);
         while(std::getline(line, buf, ' ')){
             if(!buf.empty()){

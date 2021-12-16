@@ -20,9 +20,6 @@ public:
     universalException(){
         message = "Undefined error";
     }
-    const char* getMessage(){
-        return message;
-    };
 };
 
 

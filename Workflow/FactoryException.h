@@ -17,7 +17,9 @@ public:
     std::string getName(){
         return name;
     }
-
+    const char * what() const noexcept override{
+        return message;
+    }
 };
 
 

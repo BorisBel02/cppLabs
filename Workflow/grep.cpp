@@ -23,4 +23,4 @@ void grep::execute(std::list<std::string>& text, argString& arg){
 }
 types grep::getType(){
         return INOUT;
-    }
+}
