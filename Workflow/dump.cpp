@@ -17,6 +17,6 @@ void dump::execute(std::list<std::string >& text, argString& arg){
         throw universalException("Out file was not opened");
     }
     for(auto const &It : text){
-        Out << It << '\n';
+        Out << It << std::endl;
     }
 }
