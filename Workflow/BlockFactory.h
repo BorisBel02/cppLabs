@@ -14,6 +14,9 @@ class BlockFactory {
 
     std::map<std::string, BlockCreator*> creators;
 public:
+    BlockFactory(BlockFactory&) = delete;
+    BlockFactory(BlockFactory&&) = delete;
+
     static BlockFactory& instance();
     Block* create(argString& params);
     void reg(const std::string& key, BlockCreator* creator);

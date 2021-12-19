@@ -9,7 +9,8 @@
 #include <fstream>
 #include <algorithm>
 #include "ConcreteBlockCreator.h"
-
-void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int>& workflow);
-
+class Functions {
+public:
+    void getInstructions(std::map<int, argString> &Blocks, char *in, std::vector<int> &workflow);
+};
 #endif //WORKFLOW_FUNCTIONS_H

@@ -5,23 +5,6 @@
 #include "FactoryException.h"
 BlockFactory& BlockFactory::instance() {
     static BlockFactory factory;
-    /*static bool initialized = false;
-    if(!initialized){
-        static ConcreteBlockCreator<readfile> read;
-        static ConcreteBlockCreator<grep> grp;
-        static ConcreteBlockCreator<replace> rplc;
-        static ConcreteBlockCreator<sort> srt;
-        static ConcreteBlockCreator<writefile> write;
-        static ConcreteBlockCreator<dump> dmp;
-
-        factory.reg("readfile", &read);
-        factory.reg("grep", &grp);
-        factory.reg("replace", &rplc);
-        factory.reg("sort", &srt);
-        factory.reg("writefile", &write);
-        factory.reg("dump", &dmp);
-        initialized = true;
-    }*/
     return factory;
 }
 

@@ -4,7 +4,8 @@
 #include "Functions.h"
 #include <sstream>
 #include "TypeException.h"
-void getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int>& workflow){
+
+void Functions::getInstructions(std::map<int, argString>& Blocks, char* in, std::vector<int>& workflow){
     std::ifstream inputFile;
     inputFile.open(in);
     if(!inputFile.is_open()){

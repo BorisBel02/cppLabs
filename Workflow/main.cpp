@@ -2,7 +2,7 @@
 #include <map>
 #include "universalException.h"
 #include "FactoryException.h"
-#include "BlockTypeCheck.h"
+#include "WorkflowExecutor.h"
 #include "TypeException.h"
 
 int main(int argc, char** argv) {
@@ -14,8 +14,10 @@ int main(int argc, char** argv) {
     std::vector<int> workflow;
     std::map<int, argString> Blocks;
     std::list<std::string> text;
+
+    Functions Parser;
     try {
-        getInstructions(Blocks, argv[1], workflow);
+        Parser.getInstructions(Blocks, argv[1], workflow);
     }
     catch (const TypeException& ex){
         std::cerr << "ERROR\nWhile reading instructions: " << ex.what() << std::endl;
@@ -26,43 +28,30 @@ int main(int argc, char** argv) {
     }
     catch (const std::exception& ex){
         std::cerr << "ERROR\n" << "in " << ex.what()  << ":\n    " << typeid(ex).name() << std::endl;
-    }
-    BlockTypeCheck check;
-    for(int i = 0; i < workflow.size(); ++i){
-        try {
-            int id = workflow[i];
-
-            if(Blocks.find(id) == Blocks.end()){
-                throw TypeException("Unknown block id", id);
-            }
-            auto Blck = BlockFactory::instance().create(Blocks[id]);
-
-            if(!check.checkStatus(Blck->getType())){
-                throw TypeException("Incorrect Block type", Blocks[id][0], id);
-            }
-
-            Blck->execute(text, Blocks[id]);
-
-            delete Blck;
-        }
-        catch (const TypeException& ex){
-            std::cerr << "ERROR\nIncorrect workflow: " << ex.what();
-            std::cerr << "\n    Block name: " << ex.getName() << "\n    Block id: " << ex.getId() << std::endl;
-            exit(4);
-        }
-        catch (const FactoryException& ex){
-            std::cerr << "ERROR\nIn Factory: " << ex.what() << "\n  Block name: " << ex.getName() << std::endl;
-            exit(2);
-        }
-        catch (const universalException& ex){
-            std::cerr << "ERROR\nDuring execution: " << ex.what() << std::endl;
-            exit(3);
-        }
-        catch (const std::exception& ex){
-            std::cerr << "ERROR\n" << "in" << ex.what()  << "\n    " << typeid(ex).name() << std::endl;
-        }
+        exit(5);
     }
 
+    WorkflowExecutor exec;
+    try{
+        exec.execWorkflow(workflow, Blocks, text);
+    }
+    catch (const TypeException& ex){
+        std::cerr << "ERROR\nIncorrect workflow: " << ex.what();
+        std::cerr << "\n    Block name: " << ex.getName() << "\n    Block id: " << ex.getId() << std::endl;
+        exit(4);
+    }
+    catch (const FactoryException& ex){
+        std::cerr << "ERROR\nIn Factory: " << ex.what() << "\n  Block name: " << ex.getName() << std::endl;
+        exit(2);
+    }
+    catch (const universalException& ex){
+        std::cerr << "ERROR\nDuring execution: " << ex.what() << std::endl;
+        exit(3);
+    }
+    catch (const std::exception& ex){
+        std::cerr << "ERROR\n" << "in" << ex.what()  << "\n    " << typeid(ex).name() << std::endl;
+        exit(5);
+    }
 
     return 0;
 }
