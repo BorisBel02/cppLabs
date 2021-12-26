@@ -105,6 +105,8 @@ Hash_table.exe: CMakeFiles/Hash_table.dir/main.cpp.obj
 Hash_table.exe: CMakeFiles/Hash_table.dir/HashTable.cpp.obj
 Hash_table.exe: CMakeFiles/Hash_table.dir/build.make
 Hash_table.exe: lib/libgtestd.a
+Hash_table.exe: lib/libgtest_maind.a
+Hash_table.exe: lib/libgtestd.a
 Hash_table.exe: CMakeFiles/Hash_table.dir/linklibs.rsp
 Hash_table.exe: CMakeFiles/Hash_table.dir/objects1.rsp
 Hash_table.exe: CMakeFiles/Hash_table.dir/link.txt

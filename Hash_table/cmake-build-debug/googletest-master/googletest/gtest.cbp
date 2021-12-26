@@ -5,7 +5,7 @@
 		<Option title="gtest"/>
 		<Option makefile_is_custom="1"/>
 		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;CMake Files\googletest-master\;CMake Files\googletest-master\googletest\;CMake Files\googletest-master\googletest\cmake\;"/>
+		<Option virtualFolders="CMake Files\;CMake Files\googletest-master\;CMake Files\googletest-master\googlemock\;CMake Files\googletest-master\googlemock\cmake\;CMake Files\googletest-master\googletest\;CMake Files\googletest-master\googletest\cmake\;"/>
 		<Build>
 			<Target title="all">
 				<Option working_dir="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/cmake-build-debug/googletest-master/googletest"/>
@@ -119,8 +119,29 @@
 		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\googletest-master\"/>
+		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googlemock/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\googletest-master\googlemock\"/>
+		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googlemock/cmake/gmock.pc.in">
+			<Option virtualFolder="CMake Files\googletest-master\googlemock\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googlemock/cmake/gmock_main.pc.in">
+			<Option virtualFolder="CMake Files\googletest-master\googlemock\cmake\"/>
+		</Unit>
 		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\googletest-master\googletest\"/>
+		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest/cmake/Config.cmake.in">
+			<Option virtualFolder="CMake Files\googletest-master\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest/cmake/gtest.pc.in">
+			<Option virtualFolder="CMake Files\googletest-master\googletest\cmake\"/>
+		</Unit>
+		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest/cmake/gtest_main.pc.in">
+			<Option virtualFolder="CMake Files\googletest-master\googletest\cmake\"/>
 		</Unit>
 		<Unit filename="C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest/cmake/internal_utils.cmake">
 			<Option virtualFolder="CMake Files\googletest-master\googletest\cmake\"/>

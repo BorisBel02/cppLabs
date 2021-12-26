@@ -20,7 +20,6 @@ Block* BlockFactory::create(argString& params) {
 void BlockFactory::reg(const std::string& key, BlockCreator *creator) {
     if(creators.find(key) != creators.end()){
         throw FactoryException("Block redefinition", key);
-        int k = 1;
     }
     creators[key] = creator;
 }

@@ -15,8 +15,9 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../googletest-master/googletest/include"
-  "../googletest-master/googletest"
+  "../lib/googletest-master/googlemock/include"
+  "../lib/googletest-master/googletest/include"
+  "../lib/googletest-master/googletest"
   )
 
 # The set of dependency files which are needed:
@@ -25,7 +26,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "C:/Users/Boris/CLionProjects/cppLabs/Hash_table/cmake-build-debug/googletest-master/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "C:/Users/Boris/CLionProjects/cppLabs/Hash_table/cmake-build-debug/lib/googletest-master/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "C:/Users/Boris/CLionProjects/cppLabs/Hash_table/cmake-build-debug/lib/googletest-master/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

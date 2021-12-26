@@ -39,7 +39,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("C:/Users/Boris/CLionProjects/cppLabs/Hash_table/cmake-build-debug/googletest-master/googletest/cmake_install.cmake")
+  include("C:/Users/Boris/CLionProjects/cppLabs/Hash_table/cmake-build-debug/lib/googletest-master/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

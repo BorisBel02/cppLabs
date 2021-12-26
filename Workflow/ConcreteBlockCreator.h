@@ -15,7 +15,6 @@ public:
         BlockFactory::instance().reg(name, this);
     }
     Block* Create(argString& args) const override{
-        //try?
         return new T;
     }
 };

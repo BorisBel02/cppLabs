@@ -17,6 +17,7 @@ typedef std::string Key;
 typedef std::vector<std::pair <Key, Value>> element;
 
 class HashTable {
+    size_t tableSize = 0;
     std::vector<element> table = std::vector<element>(256);
     unsigned hashFunc(const Key& key) const;
 public:

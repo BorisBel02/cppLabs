@@ -4,6 +4,8 @@
 
 #include "HashTable.h"
 #include "Shuffle.h"
+#include "AtException.h"
+
 HashTable::HashTable(const HashTable& b){
     this -> table = b.table;
 }
@@ -60,6 +62,7 @@ bool HashTable::erase(const Key& k){
             table[index].erase(it);
 
             if(check - 1 == table[index].size()){
+                --tableSize;
                 return true;
             }
             else{
@@ -78,6 +81,7 @@ bool HashTable::insert(const Key& k, const Value& v){
     if(check == table[index].size()){
         return false;
     }
+    ++tableSize;
     return true;
 }
 bool HashTable::contains(const Key& k) const{
@@ -90,49 +94,42 @@ bool HashTable::contains(const Key& k) const{
     return false;
 }
 size_t HashTable::size() const {
-    size_t res = 0;
-    for(const auto& el : table){
-        res += el.size();
-    }
-    return res;
+    return 0;
 }
 Value& HashTable::at(const Key &k) {
     unsigned index = hashFunc(k);
-    try {
+    //try {
         for (auto &it: table[index]) {
             if (k == it.first) {
                 return it.second;
             }
         }
-        throw -1;
-    }
-    catch(short i) {
-        std::cout << "ERROR: value with such key was not found" << std::endl;
-    }
+        throw AtException("No element with such key");
+
 }
 const Value& HashTable::at(const Key& k) const{
     unsigned index = hashFunc(k);
-    try {
+    //try {
         for (auto &it: table[index]) {
             if (k == it.first) {
                 return it.second;
             }
         }
-        throw -1;
-    }
-    catch(short i) {
-        std::cout << "ERROR: value with such key was not found" << std::endl;
-    }
+        throw AtException("No element with such key");
+
 }
 bool HashTable::empty() const {
     return table.empty();
 }
 
+bool operator==(const Student& a, const Student& b){
+        return a.age == b.age && a.weight == b.weight;
+}
 
 bool operator==(const HashTable& a, const HashTable& b){
     for(const auto & i : a.table){
         for(const auto & j : i){
-            if(!b.contains(j.first)){
+            if(b.contains(j.first)){
                 return false;
             }
         }

@@ -1,1 +1,1 @@
--isystem C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest/include -isystem C:/Users/Boris/CLionProjects/cppLabs/Hash_table/googletest-master/googletest
+-IC:/Users/Boris/CLionProjects/cppLabs/Hash_table/lib/googletest-master/googlemock/include -isystem C:/Users/Boris/CLionProjects/cppLabs/Hash_table/lib/googletest-master/googletest/include -isystem C:/Users/Boris/CLionProjects/cppLabs/Hash_table/lib/googletest-master/googletest
