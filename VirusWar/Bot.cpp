@@ -28,7 +28,7 @@ point Bot::findPoint(point p, char (&field)[10][10], char what){
 }
 void Bot::updatePopulations(char (&field)[10][10]) {
     for(int i = 0; i < growPopulation.size(); ++i){
-        if(!find(growPopulation[i].first, growPopulation[i].second, '0', field) &&
+        if(!find(growPopulation[i].first, growPopulation[i].second, '*', field) &&
         tolower(field[growPopulation[i].first][growPopulation[i].second]) != tolower(enemySymbol) ){
             growPopulation.erase(growPopulation.begin() + i);
         }
@@ -43,7 +43,7 @@ void Bot::updatePopulations(char (&field)[10][10]) {
 std::string Bot::makeGrowCommand(char (&field)[10][10]) {
     std::string command;
     point coord = growPopulation[rand()%growPopulation.size()];
-    coord = findPoint(coord, field, '0');
+    coord = findPoint(coord, field, '*');
     command = "grow " + std::to_string(coord.second) + ' ' + std::to_string(coord.first);
     growPopulation.emplace_back(coord);
     killPopulation.emplace_back(coord);

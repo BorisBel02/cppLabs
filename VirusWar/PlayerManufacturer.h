@@ -2,18 +2,18 @@
 // Created by Boris on 25.12.2021.
 //
 
-#ifndef VIRUSWAR_PLAYERFABRIC_H
-#define VIRUSWAR_PLAYERFABRIC_H
+#ifndef VIRUSWAR_PLAYERMANUFACTURER_H
+#define VIRUSWAR_PLAYERMANUFACTURER_H
 
 #include "gameException.h"
 #include <memory>
 #include "Human.h"
 #include "Bot.h"
 
-class PlayerFabric {
+class PlayerManufacturer {
 public:
     std::shared_ptr<Player> create(std::string& type);
 };
 
 
-#endif //VIRUSWAR_PLAYERFABRIC_H
+#endif //VIRUSWAR_PLAYERMANUFACTURER_H

@@ -10,12 +10,12 @@ void Controller::runGame() {
     this->game = std::make_shared<Game>();
     this->view = std::make_shared<View>();
 
-    std::string player1str = "Bot";
-    std::string player2str = "Bot";
-    /*std::cout << "Who will be the first player, Bot or Human?" << std::endl;
+    std::string player1str;
+    std::string player2str;
+    std::cout << "Who will be the first player, Bot or Human?" << std::endl;
     std::cin >> player1str;
     std::cout << "Who will be the second player, Bot or Human?" << std::endl;
-    std::cin >> player2str;*/
+    std::cin >> player2str;
 
     std::shared_ptr<Player> player1 = fabric.create(player1str);
     player1->setEnemy('O');

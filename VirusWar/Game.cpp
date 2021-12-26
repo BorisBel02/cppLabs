@@ -8,7 +8,7 @@
 Game::Game() {
     for(auto & i : field){
         for(int j = 0; j < 10; ++j){
-            i[j] = '0';
+            i[j] = '*';
         }
         i[10] = '\0';
     }
@@ -47,7 +47,7 @@ bool Game::accessible(int x, int y) {
 }
 
 void Game::grow(int x, int y) {
-    if (field[x][y] == '0' && accessible(x, y)) {
+    if (field[x][y] == '*' && accessible(x, y)) {
         field[x][y] = playerTurn;
         ++turnCounter;
     }

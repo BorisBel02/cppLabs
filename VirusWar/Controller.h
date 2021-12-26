@@ -13,10 +13,10 @@
 #include "gameException.h"
 #include "Bot.h"
 #include "Human.h"
-#include "PlayerFabric.h"
+#include "PlayerManufacturer.h"
 
 class Controller {
-    PlayerFabric fabric;
+    PlayerManufacturer fabric;
     std::shared_ptr<Game> game;
     std::shared_ptr<View> view;
 
