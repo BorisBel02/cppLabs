@@ -21,7 +21,7 @@ class HashTable {
     std::vector<element> table = std::vector<element>(256);
     unsigned hashFunc(const Key& key) const;
 public:
-    HashTable() = default;
+    HashTable();
     ~HashTable() = default;
 
     HashTable(const HashTable& b);
@@ -62,8 +62,10 @@ public:
 
     friend bool operator==(const HashTable& a, const HashTable& b);
     friend bool operator!=(const HashTable& a, const HashTable& b);
+    friend bool operator==(const Student& a, const Student& b);
 };
 
+bool operator==(const Student& a, const Student& b);
 bool operator==(const HashTable& a, const HashTable& b);
 bool operator!=(const HashTable& a, const HashTable& b);
 

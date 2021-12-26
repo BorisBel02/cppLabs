@@ -6,6 +6,9 @@
 #include "Shuffle.h"
 #include "AtException.h"
 
+HashTable::HashTable() {
+    tableSize = 0;
+}
 HashTable::HashTable(const HashTable& b){
     this -> table = b.table;
 }
@@ -39,6 +42,7 @@ HashTable& HashTable::operator = (HashTable&& b){
     return *this;
 }
 void HashTable::clear(){
+    if(this->size() == 0)
     table.clear();
 }
 Value& HashTable::operator[](const Key& k){
@@ -94,7 +98,7 @@ bool HashTable::contains(const Key& k) const{
     return false;
 }
 size_t HashTable::size() const {
-    return 0;
+    return this->tableSize;
 }
 Value& HashTable::at(const Key &k) {
     unsigned index = hashFunc(k);
