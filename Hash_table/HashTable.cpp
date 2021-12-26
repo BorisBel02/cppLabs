@@ -6,9 +6,7 @@
 #include "Shuffle.h"
 #include "AtException.h"
 
-HashTable::HashTable() {
-    tableSize = 0;
-}
+
 HashTable::HashTable(const HashTable& b){
     this -> table = b.table;
 }
@@ -25,7 +23,7 @@ unsigned HashTable::hashFunc(const Key& key) const{
         h = Shuffle[index];
         hash += h;
     }
-    hash %= table.size();
+    hash %= 256;
     return hash;
 }
 void HashTable::swap(const HashTable &b) {
@@ -42,8 +40,8 @@ HashTable& HashTable::operator = (HashTable&& b){
     return *this;
 }
 void HashTable::clear(){
-    if(this->size() == 0)
     table.clear();
+    tableSize = 0;
 }
 Value& HashTable::operator[](const Key& k){
     unsigned index = hashFunc(k);
@@ -53,9 +51,9 @@ Value& HashTable::operator[](const Key& k){
             return it->second;
         }
     }
-    ++it;
-    table[index].emplace_back();
 
+    table[index].emplace_back();
+    it = table[index].end() - 1;
     return it -> second;
 }
 bool HashTable::erase(const Key& k){
@@ -85,7 +83,7 @@ bool HashTable::insert(const Key& k, const Value& v){
     if(check == table[index].size()){
         return false;
     }
-    ++tableSize;
+    this->tableSize++;
     return true;
 }
 bool HashTable::contains(const Key& k) const{
@@ -133,7 +131,7 @@ bool operator==(const Student& a, const Student& b){
 bool operator==(const HashTable& a, const HashTable& b){
     for(const auto & i : a.table){
         for(const auto & j : i){
-            if(b.contains(j.first)){
+            if(!b.contains(j.first)){
                 return false;
             }
         }

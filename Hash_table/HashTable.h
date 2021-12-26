@@ -17,11 +17,15 @@ typedef std::string Key;
 typedef std::vector<std::pair <Key, Value>> element;
 
 class HashTable {
-    size_t tableSize = 0;
+protected:
+    unsigned tableSize;
+
     std::vector<element> table = std::vector<element>(256);
     unsigned hashFunc(const Key& key) const;
 public:
-    HashTable();
+    HashTable(){
+        this -> tableSize = 0;
+    };
     ~HashTable() = default;
 
     HashTable(const HashTable& b);
