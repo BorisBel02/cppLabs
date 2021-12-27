@@ -67,6 +67,7 @@ void Game::grow(int x, int y) {
         playerTurn = enemy;
         enemy = tmp;
     }
+    notifySubscribers();
 }
 
 void Game::killEnemy(int x, int y) {
@@ -89,6 +90,7 @@ void Game::killEnemy(int x, int y) {
         playerTurn = enemy;
         enemy = tmp;
     }
+    notifySubscribers();
 }
 
 

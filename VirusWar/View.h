@@ -6,13 +6,20 @@
 #define VIRUSWAR_VIEW_H
 
 #include <iostream>
+#include <memory>
+#include "ObserverInterface.h"
+#include "Game.h"
 
-class View {
+class View :public ObserverInterface{
+    std::shared_ptr<Game> publisher;
+
 public:
-    void printScore(std::pair<unsigned, unsigned> score);
-    void printFrame(char (&field)[10][10]);
-    void printTurn(char t);
-    void printActions(unsigned turns);
+    View(std::shared_ptr<Game> p){
+        publisher = p;
+        publisher ->reg(this);
+    };
+    void update() override;
+
 };
 
 

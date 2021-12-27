@@ -7,10 +7,8 @@
 
 
 void Controller::runGame() {
-    this->game = std::make_shared<Game>();
-    this->view = std::make_shared<View>();
-    view->setGame(game);
-    game->registerObserver(view);
+    game = std::make_shared<Game>();
+    view = std::make_shared<View>(game);
 
     std::string player1str;
     std::string player2str;
@@ -27,11 +25,6 @@ void Controller::runGame() {
     while (true) {
 
         try {
-
-            view->printScore(game->getScore());
-            view->printTurn(game->getTurn());
-            view->printActions(game->getTurnQty());
-            view->printFrame(game->getField());
 
             std::string line;
             int x;

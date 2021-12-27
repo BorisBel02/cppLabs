@@ -5,7 +5,9 @@
 #ifndef VIRUSWAR_GAME_H
 #define VIRUSWAR_GAME_H
 
+#include "ObserverInterface.h"
 #include <map>
+#include <list>
 
 class Game {
     char field[10][10];
@@ -22,16 +24,12 @@ class Game {
     std::map<std::pair<int, int>, bool> chain;
     bool accessible(int x, int y);
 
+
+    std::list<ObserverInterface*> observers;
 public:
     Game();
     void killEnemy(int x, int y);
     void grow(int x, int y);
-    void setPlayer(char player){
-        playerTurn = player;
-    }
-    unsigned getFilledCells(){
-        return filledCells;
-    }
     char (&getField())[10][10] {
         return field;
     }
@@ -41,12 +39,19 @@ public:
     char getTurn(){
         return playerTurn;
     }
-    void setTurn(char t){
-        playerTurn = t;
-    }
     unsigned getTurnQty(){
         return turnCounter;
     }
+    //Observer pattern methods:
+    void reg(ObserverInterface* instance){
+        observers.push_back(instance);
+    }
+    void notifySubscribers(){
+        for(auto it : observers){
+            it->update();
+        }
+    }
+
 };
 
 #endif //VIRUSWAR_GAME_H
