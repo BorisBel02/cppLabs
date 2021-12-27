@@ -9,6 +9,8 @@
 void Controller::runGame() {
     this->game = std::make_shared<Game>();
     this->view = std::make_shared<View>();
+    view->setGame(game);
+    game->registerObserver(view);
 
     std::string player1str;
     std::string player2str;
