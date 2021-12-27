@@ -25,7 +25,7 @@ int main() {
     std::fstream in("in.txt");
     try {
         Parser<int, double, char, std::string> parser(in, '\n', ',', '"', 0);
-        for(auto rs : parser.tuplesArr){
+        for(auto rs : parser){
             std::cout << rs;
         }
     }

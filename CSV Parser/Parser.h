@@ -42,7 +42,7 @@ template<typename ...Args>
 class Parser {
 public:
         typedef std::tuple<Args...> usingTuple;
-        std::vector<usingTuple> tuplesArr;
+
 private:
     std::istream* istream;
     unsigned currentLineNumber = 0;
@@ -50,8 +50,8 @@ private:
     char columnDelim = ',';
     char escapeSymbol = '"';
     usingTuple tupl;
+    std::vector<usingTuple> tuplesArr;
 
-    int arraySize = 0;
     void read(int skip){
         std::string line;
         for(int i = 0; i < skip; ++i) {
@@ -87,7 +87,6 @@ private:
                 std::stringstream strstream(str);
                 fillTuple<0, Args...>(tupl, strstream);
                 tuplesArr.emplace_back(tupl);
-                ++arraySize;
                 str.clear();
                 i = 0;
             }
@@ -118,6 +117,12 @@ public:
     Parser(std::istream& in, int skip){
         istream = &in;
         read(skip);
+    }
+    typename std::vector<usingTuple>::iterator begin(){
+        return tuplesArr.begin();
+    }
+    typename std::vector<usingTuple>::iterator end(){
+        return tuplesArr.end();
     }
     /*class Iterator{
         usingTuple* currentEl;
@@ -156,17 +161,14 @@ public:
         }
 
 
-        Iterator(std::vector<std::tuple<int, double, char, std::basic_string<char>>>::iterator iterator) {
-
-        }
     };
     Iterator begin(){
         return tuplesArr.begin();
     }
     Iterator end(){
         return tuplesArr.end();
-    }*/
-
+    }
+*/
 };
 
 
