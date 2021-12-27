@@ -20,12 +20,17 @@ auto operator<<(std::basic_ostream<Ch, Tr>& os, std::tuple<Args...> const& t){
 }
 
 int main() {
-    std::tuple<int, double, char, std::string> tuple1(1, 1.0, 'j', "hello world");
-    std::cout << tuple1;
+    //std::tuple<int, double, char, std::string> tuple1(1, 1.0, 'j', "hello world");
+    //std::cout << tuple1;
     std::fstream in("in.txt");
+    std::fstream in2("in2.txt");
     try {
         Parser<int, double, char, std::string> parser(in, '\n', ',', '"', 0);
-        for(auto rs : parser){
+        for (auto rs: parser) {
+            std::cout << rs;
+        }
+        Parser<char, double, int, std::string> parser2(in2, '\n', ',', '"', 1);
+        for (auto rs: parser2) {
             std::cout << rs;
         }
     }

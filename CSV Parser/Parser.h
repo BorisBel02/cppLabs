@@ -58,42 +58,34 @@ private:
             std::getline(*istream, line, lineDelim);
             ++currentLineNumber;
         }
-        while(istream->eof()){
-            /*std::getline(*istream, line, lineDelim);
-            ++currentLineNumber;
-            for(int i = 0; i < (sizeof ...(Args)); ++i){
-                std::string str;
-                std::stringstream lineStream(line);
-                std::getline(lineStream, str, columnDelim);
-                std::stringstream strStream(str);
-                strStream >> get<i>(tupl);
-            }
-            tuplesArr.emplace_back(tupl);*/
+        line.clear();
+        int i = 1;
+        while(true){
             char ch;
-            int i = 1;
-            std::string str;
+            istream->get(ch);
+            if(istream->eof()){
+                break;
+            }
             if(ch == columnDelim){
-                /*std::stringstream strStream(str);
-                strStream >> std::get<i>(tupl);*/
-                str.push_back(' ');
+                line.push_back(' ');
                 ++i;
             }
             else if(ch == lineDelim){
-                if(i + 1 != sizeof ...(Args)){
+                if(i != sizeof ...(Args)){
                     std::string error = "Lack of tuple elements in line: "
                             + std::to_string(currentLineNumber) + "\nin column: " + std::to_string(i);
                     throw ParseException(error);
                 }
-                std::stringstream strstream(str);
+                std::stringstream strstream(line);
                 fillTuple<0, Args...>(tupl, strstream);
                 tuplesArr.emplace_back(tupl);
-                str.clear();
-                i = 0;
+                line.clear();
+                i = 1;
             }
             else if(ch == escapeSymbol){
                 std::string shield;
                 std::getline(*istream, shield, escapeSymbol);
-                if(istream->eof()){
+                if(!istream->eof()){
                     std::string error = "No escape symbol in line: "
                     + std::to_string(currentLineNumber) + "\nin column: " + std::to_string(i);
                     throw ParseException(error);
@@ -101,7 +93,7 @@ private:
                 std::cout << shield << std::endl;
             }
             else {
-                str.push_back(ch);
+                line.push_back(ch);
             }
         }
     }
@@ -124,51 +116,6 @@ public:
     typename std::vector<usingTuple>::iterator end(){
         return tuplesArr.end();
     }
-    /*class Iterator{
-        usingTuple* currentEl;
-    public:
-        Iterator(usingTuple* first) : currentEl(first){};
-
-        usingTuple& operator+ (int offset){
-            return *(currentEl + offset);
-        }
-        usingTuple& operator- (int offset){
-            return *(currentEl - offset);
-        }
-
-        usingTuple& operator++ (int){
-            return *++currentEl;
-        }
-        usingTuple& operator-- (int){
-            return *--currentEl;
-        }
-        usingTuple& operator++ (){
-            return *++currentEl;
-        }
-        usingTuple& operator-- (){
-            return *--currentEl;
-        }
-
-        bool operator!= (const Iterator& it){
-            return currentEl != it.currentEl;
-        }
-        bool operator== (const Iterator& it){
-            return currentEl == it.currentEl;
-        }
-
-        usingTuple& operator*(){
-            return *currentEl;
-        }
-
-
-    };
-    Iterator begin(){
-        return tuplesArr.begin();
-    }
-    Iterator end(){
-        return tuplesArr.end();
-    }
-*/
 };
 
 
