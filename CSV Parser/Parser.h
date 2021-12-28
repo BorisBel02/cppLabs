@@ -86,6 +86,7 @@ public:
         char lineDelim = '\n';
         char columnDelim = ',';
         char escapeSymbol = '"';
+
         usingTuple tupl;
 
     public:
@@ -108,8 +109,8 @@ public:
                 char ch;
 
                 istream->get(ch);
-                if(ch == EOF){
-                    istream == nullptr;
+                if(istream->eof()){
+                    istream = nullptr;
                     currentLineNumber = -1;
                     break;
                 }
