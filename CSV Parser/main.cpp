@@ -26,11 +26,11 @@ int main() {
     std::fstream in2("in2.txt");
     try {
         Parser<int, double, char, std::string> parser(in, '\n', ',', '"', 0);
-        for (auto rs: parser) {
+        for (auto rs : parser) {
             std::cout << rs;
         }
         Parser<char, double, int, std::string> parser2(in2, '\n', ',', '"', 1);
-        for (auto rs: parser2) {
+        for (auto rs : parser2) {
             std::cout << rs;
         }
     }
