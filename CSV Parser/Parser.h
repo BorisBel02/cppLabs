@@ -14,30 +14,31 @@
 #include <vector>
 #include "ParseException.h"
 
-template<typename T>
-inline bool convert(const std::string& column, T &t) {
-    std::stringstream stringstream(column);
-    stringstream >> t;
+template<size_t pos, typename ...Args>
+inline bool convert(const std::vector<std::string>& column, std::tuple<Args...> &t) {
+    std::stringstream stringstream(column[pos]);
+    stringstream >> std::get<pos>(t);
     if (stringstream.fail() || stringstream.bad()) {
         return false;
     }
     return true;
 }
-template<>
-inline bool convert(const std::string& column, std::string& t){
-    t = column;
-    return true;
-}
+
 
 
 template<size_t pos, typename ...Args>
 inline void fillTuple(std::tuple<Args...>& t, std::vector<std::string>& vec, std::enable_if_t<pos == (sizeof ...(Args) - 1), void>* = nullptr){
+    if(!convert<pos, Args...>(vec, t)){
+        std::string error = "can not convert in column: " + std::to_string(pos);
+        throw ParseException(error);
+    }
     std::stringstream strstream(vec[pos]);
     strstream >> std::get<pos>(t);
 }
 
 template<size_t pos, typename ...Args>
 inline void fillTuple(std::tuple<Args...>& t, std::vector<std::string>& vec, std::enable_if_t<pos < (sizeof ...(Args) - 1), void>* = nullptr){
+    convert<pos, Args...>(vec, t);
     std::stringstream strstream(vec[pos]);
     strstream >> std::get<pos>(t);
     fillTuple<pos + 1, Args...>(t, vec);
@@ -54,7 +55,7 @@ public:
 
 private:
     std::istream* istream;
-    unsigned currentLineNumber = 0;
+    int currentLineNumber = 0;
     char lineDelim = '\n';
     char columnDelim = ',';
     char escapeSymbol = '"';
@@ -81,7 +82,7 @@ public:
     }
     class Iterator{
         std::istream* istream;
-        unsigned currentLineNumber = 0;
+        int currentLineNumber = 0;
         char lineDelim = '\n';
         char columnDelim = ',';
         char escapeSymbol = '"';
@@ -95,33 +96,42 @@ public:
             columnDelim = cD;
             escapeSymbol = eS;
         }
-        Iterator(std::istream* istr){
+        Iterator(std::istream* istr, unsigned cL){
             istream = istr;
-            currentLineNumber = -1;
+            currentLineNumber = cL;
         }
         Iterator& operator++(){
             int i = 1;
             std::string str;
             std::vector<std::string> line;
-            while(true){
+            while(istream -> good()){
                 char ch;
+
                 istream->get(ch);
-                if(istream->eof()){
-                    istream = nullptr;
+                if(ch == EOF){
+                    istream == nullptr;
+                    currentLineNumber = -1;
                     break;
                 }
                 if(ch == columnDelim){
                     line.push_back(str);
+                    str.clear();
                     ++i;
                 }
                 else if(ch == lineDelim){
+                    line.push_back(str);
                     if(i != sizeof ...(Args)){
                         std::string error = "Lack of tuple elements in line: "
                                             + std::to_string(currentLineNumber) + "\nin column: " + std::to_string(i);
                         throw ParseException(error);
                     }
-
-                    fillTuple<0, Args...>(tupl, line);
+                    try {
+                        fillTuple<0, Args...>(tupl, line);
+                    }
+                    catch(ParseException& ex){
+                        std::string error = ex.Pwhat() + " in line: " + std::to_string(currentLineNumber);
+                        throw ParseException(error);
+                    }
                     ++currentLineNumber;
                     break;
                 }
@@ -159,12 +169,15 @@ public:
         bool operator!=(Iterator& other){
             return !(this == &other);
         }
+        usingTuple operator*(){
+            return tupl;
+        }
     };
     Iterator begin(){
-        return Iterator(this -> istream, this -> currentLineNumber, this -> lineDelim, this -> columnDelim, this -> escapeSymbol);
+        return ++Iterator(this -> istream, this -> currentLineNumber, this -> lineDelim, this -> columnDelim, this -> escapeSymbol);
     }
     Iterator end(){
-        return Iterator(nullptr);
+        return Iterator(nullptr, -1);
     }
 };
 
